@@ -8,6 +8,10 @@
 
 body {
   /* font-family: Arial, sans-serif; */
+  /* background-image: url("https://blog.getmyparking.com/wp-content/uploads/2018/09/parking-lighting-1200x675.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
   line-height: 1.6;
   background-color: #f4f4f4;
 }
@@ -28,7 +32,7 @@ nav {
 
 nav h1{
   background-color: black;
-  padding: 0 30px;
+  padding: 5px 80px;
   color: white;
   text-transform: uppercase;
   font-style: italic;
@@ -93,7 +97,6 @@ h1, h2 {
   background: repeating-linear-gradient(45deg,#cfcfcf,#cfcfcf 8px,#ececec 8px,#ececec 16px);
 }
 
-/* Center blocks */
 .center-block {
   display: flex;
   gap: 40px;
@@ -132,6 +135,13 @@ h1, h2 {
   color: white;
 }
 
+/* #booking h2 {
+  background-color: rgb(219, 219, 219);
+  padding: 10px 20px;
+  border: 1px solid gray;
+  border-radius: 10px;
+} */
+
 form {
   display: flex;
   flex-direction: column;
@@ -166,7 +176,7 @@ form button:hover {
 
 footer {
   text-align: center;
-  color: black;
+  color: rgba(163, 163, 163, 0.842);
   padding: 10px;
   margin-top: 40px;
 }
