@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const numberOfRandom = 60; 
+  const numberOfRandom = Math.floor(Math.random() * (80 - 1 + 1)) + 1;
   const allSlots = Array.from(document.querySelectorAll(".slot"));
   const shuffled = allSlots.sort(() => Math.random() - 0.5);
 
@@ -11,28 +11,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+let selectedSpots = [];
+
+function clearBooking() {
+  selectedSpots = [];
+  document.querySelectorAll(".slot.selected").forEach(slot => {
+    slot.classList.remove("selected");
+  });
+  document.getElementById("spot").innerHTML = '<option value="" disabled selected>Select a spot</option>';
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const selectSpot = document.getElementById("spot");
+  
+  function updateDropdown() {
+    selectSpot.innerHTML = '<option value="" disabled>Selected spot(s)</option>';
+
+    if (selectedSpots.length === 0) {
+      selectSpot.value = "";
+      return;
+    }
+
+    selectedSpots.forEach(spotValue => {
+      let option = new Option(`Spot ${spotValue}`, spotValue, true, true);
+      selectSpot.add(option);
+    });
+  }
 
   document.querySelectorAll(".slot").forEach(slot => {
     slot.addEventListener("click", () => {
+      const selectedSpotValue = slot.getAttribute("data-spot");
 
-      const selectedSpot = slot.getAttribute("data-spot");
-      selectSpot.innerHTML = '<option value="" disabled selected>Select a spot</option>';
-
-      if(slot.classList.contains("occupied")){
-        return alert(`❌ Spot ${selectedSpot} is already booked.`);
-        selectSpot.value = "";
+      if (slot.classList.contains("occupied")) {
+        return alert(`❌ Spot ${selectedSpotValue} is already booked.`);
       }
 
-      document.querySelectorAll(".slot").forEach(s => s.classList.remove("selected"));
+      if (slot.classList.contains("selected")) {
+        slot.classList.remove("selected");
+        selectedSpots = selectedSpots.filter(spot => spot !== selectedSpotValue);
+      } else {
+        slot.classList.add("selected");
+        selectedSpots.push(selectedSpotValue);
+      }
+      selectedSpots.sort((a, b) => a - b);
 
-      slot.classList.add("selected");
-
-      let option = new Option(selectedSpot, selectedSpot);
-      selectSpot.add(option);
-
-      selectSpot.value = selectedSpot;
+      updateDropdown();
     });
   });
 });
@@ -40,26 +63,45 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("booking-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const spot = document.getElementById("spot").value;
+  const selectElement = document.getElementById("spot");
+  const selectedOptions = Array.from(selectElement.options).filter(option => option.selected && option.value !== "");
+  
   const time = document.getElementById("time").value;
 
-  if (!spot) return alert("❌ Please select a parking spot.");
+  if (selectedOptions.length === 0) return alert("❌ Please select at least one parking spot.");
   if (!time) return alert("❌ Please select a booking time.");
 
-  const selectedSlot = document.querySelector(`.slot[data-spot="${spot}"]`);
+  let bookedSpotsCount = 0;
+  let occupiedAlerts = [];
 
-  if (!selectedSlot) return alert("⚠ Slot not found.");
+  selectedOptions.forEach(option => {
+    const spotValue = option.value;
+    const selectedSlot = document.querySelector(`.slot[data-spot="${spotValue}"]`);
 
-  if (selectedSlot.classList.contains("occupied")) {
-    return alert(`❌ Spot ${spot} is already booked.`);
+    if (!selectedSlot) {
+      console.warn(`Slot ${spotValue} not found in DOM.`);
+      return;
+    }
+
+    if (selectedSlot.classList.contains("occupied")) {
+      occupiedAlerts.push(spotValue);
+    } else {
+      selectedSlot.classList.remove("available");
+      selectedSlot.classList.remove("selected");
+      selectedSlot.classList.add("occupied");
+      bookedSpotsCount++;
+    }
+  });
+
+  if (occupiedAlerts.length > 0) {
+    alert(`The following spots were already booked: ${occupiedAlerts.join(', ')}.`);
   }
 
-  selectedSlot.classList.remove("available");
-  selectedSlot.classList.remove("selected");
-  selectedSlot.classList.add("occupied");
-  
-  alert(`✔ Spot ${spot} booked successfully for ${time}!`);
+  if (bookedSpotsCount > 0) {
+    alert(`✔ Successfully booked ${bookedSpotsCount} spot(s) for ${time}!`);
+  }
 
+  clearBooking();
   document.getElementById("booking-form").reset();
 });
 
