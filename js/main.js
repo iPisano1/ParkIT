@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const numberOfRandom = 10; 
+  const numberOfRandom = 60; 
   const allSlots = Array.from(document.querySelectorAll(".slot"));
   const shuffled = allSlots.sort(() => Math.random() - 0.5);
 
@@ -63,8 +63,6 @@ document.getElementById("booking-form").addEventListener("submit", function (e) 
   document.getElementById("booking-form").reset();
 });
 
-// function logout(){
-//   logoutBtn = document.getElementById("logoutBtn");
-//   alert("Kyle Bayot");
-//   window.location.href = "login.html";
-// }
+function adminLog(){
+  window.location.href = "login.html";
+}
