@@ -6,40 +6,39 @@
 }
 
 body {
-  line-height: 1.6;
   background-color: #f4f4f4;
+  line-height: 1.6;
 }
 
+/* NAVIGATION */
 header {
-  margin-top: 0;
-  width: 100%;
-  padding: 0px 0;
-  text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav {
-  background: #f7f7f7;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-  border-bottom: 1px solid #292929;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: #f7f7f7;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #292929;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 25px;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-nav h1{
-  padding: 5px 80px;
-  color: rgba(0, 0, 0, 0.87);
-  text-transform: uppercase;
-  font-weight: bold;
+nav img{
+  width: 150px;
+  height: 80px;
 }
 
-#adminBtn{
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-  padding: 8px 35px;
+/* ADMIN BUTTON */
+.adminBtn {
+  width: 100px;
+  height: 40px;
   background-color: #f7bb4e;
   color: black;
   font-weight: bold;
@@ -48,16 +47,11 @@ nav h1{
   cursor: pointer;
 }
 
-#adminBtn:hover{
+.adminBtn:hover {
   background-color: #e6a83c;
 }
 
-#home {
-  background-color: rgb(219, 219, 219);
-  padding: 10px 20px;
-  border-radius: 10px;
-}
-
+/*  MAIN LAYOUT */
 main {
   padding: 20px;
   margin: 0px 200px;
@@ -67,8 +61,14 @@ section {
   margin-bottom: 30px;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: #333;
+}
+
+/* PARKING SLOTS DISPLAY */
+.parking-view h2{
+  text-align: center;
 }
 
 .parking-wrapper {
@@ -81,7 +81,8 @@ h1, h2 {
 
 .center-block {
   display: flex;
-  gap: 20px;
+  gap: 40px;
+  margin: 20px 0;
 }
 
 .row {
@@ -90,59 +91,69 @@ h1, h2 {
   margin: 4px 0;
 }
 
+/* SLOT BOXES */
 .slot {
   width: 80px;
   height: 45px;
   border: 2px solid #2d3e50;
   border-radius: 4px;
   position: relative;
-  background: white;
-}
-
-.slot:hover{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
   cursor: pointer;
-  transform: scale(1.1);
-  transition: transform 0.2s ease-in-out;
+  user-select: none;
 }
 
-.disabled{
-  background: repeating-linear-gradient(45deg,#cfcfcf,#cfcfcf 8px,#ececec 8px,#ececec 16px);
-}
-
-.center-block {
-  display: flex;
-  gap: 40px;
-  margin: 20px 0;
-}
-
-.parking-spot {
-  padding: 20px;
-  text-align: center;
-  border: 2px solid #ddd;
-  width: 150px;
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.parking-spot:hover{
-  background-color: gray;
+.slot:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
 
+.slot.selected {
+  outline: 3px solid #2ecc71;
+  box-shadow: 0 0 6px rgba(46, 204, 113, 0.35);
+}
+
+.slot.available {
+  background: #ffffff;
+  color: #000;
+}
+
+.slot.occupied {
+  background: #e74c3c;
+  color: #fff;
+}
+
+
+
+.center-block>div {
+  margin-bottom: 12px;
+}
+
+/* STATUS COLORS */
 .available {
-  background-color: #28a745;
-  color: white;
+  background-color: #28a745 !important;
 }
 
 .selected {
-  background-color: #ffc107;
-  color: white;
+  background-color: #ffc107 !important;
 }
 
 .occupied {
-  background-color: #dc3545;
-  color: white;
+  background-color: #dc3545 !important;
+}
+
+.slot.occupied {
+  pointer-events: none;
+}
+
+/* FORM */
+#booking{
+  justify-content: center;
+  margin: 0 auto;
+  width: 1100px;
 }
 
 form {
@@ -154,7 +165,9 @@ form label {
   margin-top: 10px;
 }
 
-form input, form select, form button {
+form input,
+form select,
+form button {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -175,7 +188,8 @@ form button:hover {
   background-color: #0056b3;
 }
 
-#contact{
+/* CONTACT & FOOTER */
+#contact {
   text-align: center;
   margin-top: 20px;
 }
@@ -187,27 +201,27 @@ footer {
   margin-top: 40px;
 }
 
-@media (max-width: 900px){
-  nav{
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav {
     flex-direction: column;
   }
 
-  #adminBtn{
+  #adminBtn {
     position: static;
     margin: 10px auto;
-    display: block;
   }
-  
+
   .center-block {
     flex-direction: column;
     align-items: center;
   }
 
-  .row {
-    justify-content: center;
+  main {
+    margin: 0px 10px;
   }
 
-  main{
-    margin: 0px 10px;
+  .row {
+    justify-content: center;
   }
 }
