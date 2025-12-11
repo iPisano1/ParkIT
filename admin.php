@@ -32,7 +32,7 @@ $available = $total - $occupied;
   <header>
     <nav>
       <img src="css/ParkIT.png" alt="">
-      <h1>Admin | Dashboard</h1>
+      <h1>Admin Dashboard</h1>
       <form method="post" action="php/logout.php">
         <button type="submit" id="logoutBtn">Log Out</button>
       </form>

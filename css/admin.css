@@ -38,7 +38,7 @@ nav h1 {
   width: 100px;
   height: 40px;
   background: #e74c3c;
-  border: none;
+  border: 1px solid black;
   color: white;
   border-radius: 6px;
   cursor: pointer;
