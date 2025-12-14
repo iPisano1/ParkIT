@@ -78,7 +78,7 @@
     <header>
         <nav>
             <img src="css/ParkIT.png" alt="">
-            <button class="adminBtn" onclick="adminLog()">Admin</button>
+            <button class="adminBtn" onclick="adminLog()" id="adminBtn">Admin</button>
         </nav>
     </header>
 
@@ -124,15 +124,15 @@
                 <select name="spot[]" id="spotSelect" multiple size="6" required></select>
 
                 <label>Booking Time:</label>
-                <input type="datetime-local" name="time" required>
+                <input type="datetime-local" name="time" required id="datetime">
 
                 <label>Your Name:</label>
-                <input type="text" name="name" required>
+                <input type="text" name="name" required id="name">
 
                 <label>Email:</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" required id="email">
 
-                <button type="submit">Book Now</button>
+                <button type="submit" id="bookBtn">Book Now</button>
                 <button type="button" id="clearSelection" style="background-color: #e74c3c;">Clear</button>
             </form>
         </section>

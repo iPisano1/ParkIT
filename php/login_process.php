@@ -14,5 +14,5 @@
     }
 
     $_SESSION['login_error'] = "❌ Invalid username or password.";
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;

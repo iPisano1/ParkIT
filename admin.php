@@ -156,7 +156,7 @@ $available = $total - $occupied;
                   <form method="POST" action="php/delete_booking.php">
                     <input type="hidden" name="id" value="<?= $b['id'] ?>">
                     <input type="hidden" name="slot_code" value="<?= $b['slot_code'] ?>">
-                    <button type="submit" style="background:#dc3545;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Delete</button>
+                    <button type="submit" id="deleteBtn-<?= $b['id'] ?>" style="background:#dc3545;color:white;padding:5px 10px;border:none;border-radius:5px;cursor:pointer;">Delete</button>
                   </form>
                 </td>
               </tr>

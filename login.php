@@ -15,16 +15,14 @@
 <body>
     <main>
         <button class="back-button" onclick="goBack()">Go Back</button>
-
         <section id="login-section">
             <h1>Admin Login</h1>
-
             <form id="loginForm" method="POST" action="php/login_process.php">
                 <label>Username:</label>
-                <input type="text" name="username" required>
+                <input id="username" type="text" name="username" required>
 
                 <label>Password:</label>
-                <input type="password" name="password" required>
+                <input id="password" type="password" name="password" required>
 
                 <?php if (!empty($_SESSION['login_error'])): ?>
                     <p class="error-message">
@@ -33,7 +31,7 @@
                     <?php unset($_SESSION['login_error']); ?>
                 <?php endif; ?>
 
-                <button type="submit">Log In</button>
+                <button type="submit" id="loginBtn">Log In</button>
             </form>
         </section>
     </main>
